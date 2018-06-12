@@ -1,11 +1,12 @@
 package main;
 
 
-public class GameModel {
-	private PlayerEnum table[][] = new PlayerEnum[Const.dimensionColumns][Const.dimensionRows];
-	public GameModel(){
-		for (int i = 0; i < Const.dimensionColumns; i++) {
-			for (int j = 0; j < Const.dimensionRows; j++) {
+public class GameModell {
+	private PlayerEnum table[][] = new PlayerEnum[Const.dimensionRows][Const.dimensionColumns];
+	
+	public GameModell(){
+		for (int i = 0; i < Const.dimensionRows; i++) {
+			for (int j = 0; j < Const.dimensionColumns; j++) {
 				table[i][j] = PlayerEnum.None;
 			}
 		}
@@ -25,9 +26,9 @@ public class GameModel {
 	}
 	
 	public PlayerEnum winVertically(){ 
-		for (int i = 0; i < Const.dimensionColumns - 3; i++) {  //zbog vece verovatnoce pobede
-			for (int j = Const.dimensionRows - 1; j >= 0; j--) {
-				if(table[i][j].equals(table[i][j+1]) &&  table[i][j+2].equals(table[i][j+3]) && table[i][j].equals(table[i][j+2])){
+		for (int j = 0; j < Const.dimensionColumns; j++) {  //zbog vece verovatnoce pobede
+			for (int i = 0; i < 3; i++) {
+				if(table[i][j].equals(table[i+1][j]) &&  table[i+2][j].equals(table[i+3][j]) && table[i][j].equals(table[i+2][j])){
 					if(table[i][j].equals(PlayerEnum.Player1)){
 						return PlayerEnum.Player1;
 					} else if(table[i][j].equals(PlayerEnum.Player2)){
@@ -41,9 +42,9 @@ public class GameModel {
 	}
 
 	public PlayerEnum winHorizontally(){
-		for (int i = 0; i < Const.dimensionColumns - 3; i++) {
-			for (int j = 0; j < Const.dimensionRows; j++) {
-				if(table[i][j].equals(table[i+1][j]) && table[i+2][j].equals(table[i+3][j]) && table[i][j].equals(table[i+2][j])){
+		for (int i = 5; i >= 0; i--) {
+			for (int j = 0; j < Const.dimensionColumns - 3; j++) {
+				if(table[i][j].equals(table[i][j+1]) && table[i][j+2].equals(table[i][j+3]) && table[i][j].equals(table[i][j+2])){
 					if(table[i][j].equals(PlayerEnum.Player1)){
 						return PlayerEnum.Player1;
 					} else if(table[i][j].equals(PlayerEnum.Player2)){
@@ -57,8 +58,8 @@ public class GameModel {
 
 	public PlayerEnum winDiagonal() {
 		//Main diagonal
-		for (int i = 0; i < Const.dimensionColumns - 3; i++) {
-			for (int j = 0; j < Const.dimensionRows - 3; j++) {
+		for (int i = 0; i < Const.dimensionRows - 3; i++) {
+			for (int j = 0; j < Const.dimensionColumns - 3; j++) {
 				if(table[i][j].equals(table[i+1][j+1]) && table[i+2][j+2].equals(table[i+3][j+3]) && table[i][j].equals(table[i+2][j+2])){
 					if(table[i][j].equals(PlayerEnum.Player1)){
 						return PlayerEnum.Player1;
@@ -69,9 +70,9 @@ public class GameModel {
 			}
 		}
 		//Other diagonal
-		for (int i = 0; i < Const.dimensionColumns - 3; i++) {
-			for (int j = Const.dimensionRows - 1; j > 2; j--) {
-				if(table[i][j].equals(table[i-1][j-1]) && table[i-2][j-2].equals(table[i-3][j-3]) && table[i][j].equals(table[i-2][j-2])){
+		for (int i = 0; i < Const.dimensionRows - 3; i++) {
+			for (int j = Const.dimensionColumns - 1; j > 2; j--) {
+				if(table[i][j].equals(table[i+1][j-1]) && table[i+2][j-2].equals(table[i+3][j-3]) && table[i][j].equals(table[i+2][j-2])){
 					if(table[i][j].equals(PlayerEnum.Player1)){
 						return PlayerEnum.Player1;
 					} else if(table[i][j].equals(PlayerEnum.Player2)){
@@ -83,3 +84,4 @@ public class GameModel {
 		return PlayerEnum.None;
 	}
 }
+

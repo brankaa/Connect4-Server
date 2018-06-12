@@ -10,8 +10,13 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 public class GameView extends JComponent {
-	public GameView(GameModel gm) {
+	GameController gameController;
+	GameModel gameModel;
+	public GameView(GameController gc, GameModel gm){
 		super();
+		gameController = gc;
+		gameModel = gm;
+		gameController.startGame();
 		this.addMouseListener(new MouseListener() {
 
 			@Override
@@ -47,7 +52,7 @@ public class GameView extends JComponent {
 						}
 						double yCenter = (double)counterYInPixels - (Const.fieldHeight + Const.gapY / 2) / 2;
 						if(Math.hypot(xPressed - xCenter, yPressed - yCenter ) < 50 /*&& inTable*/){
-							gm.setX(counterX);
+							gm.setField(counterX, PlayerEnum.Player1);
 							//System.out.println(gm.getX());
 						}
 						repaint();
@@ -82,11 +87,18 @@ public class GameView extends JComponent {
 		g2d.scale(width/Const.width, height/Const.height);
 		g2d.setPaint(Color.BLACK);
 		g2d.fillRect(0, 0, Const.width, Const.height);
-		g2d.setPaint(Color.LIGHT_GRAY);
 		int x = 0, y = Const.fieldHeight;
-		for (int i = 0; i < Const.dimensionRows; i++) {
+		for (int j = 0; j < Const.dimensionRows; j++) {
 			y+=Const.gapY;
-			for (int j = 0; j < Const.dimensionColumns; j++) {
+			for (int i = 0; i < Const.dimensionColumns; i++) {
+				if(gameModel.getPlayer(i,j).equals(PlayerEnum.None)){
+					g2d.setPaint(Color.LIGHT_GRAY);
+				} else if(gameModel.getPlayer(i,j).equals(PlayerEnum.Player1)){
+					g2d.setPaint(Color.RED);
+				} else {
+					g2d.setPaint(Color.YELLOW);
+				}
+				
 				x+=Const.fieldWidth;
 				g2d.fillOval(x, y, Const.fieldWidth, Const.fieldHeight);
 				x+=Const.gapX;
