@@ -7,14 +7,14 @@ import java.net.Socket;
 import java.nio.BufferUnderflowException;
 
 public class GameController {
-	GameModel gameModel;
+	GameModel gameModel;		
 	public GameController(GameModel gm) {
 		gameModel = gm;
 	}
 	
 	public void startGame(){
-		try {
-			Socket connectionSocket = new Socket("127.0.0.1", 9000);
+	/*	try {
+			Socket connectionSocket = new Socket("localhost", 9012);		
 			BufferedReader serverInput = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
 			String line = serverInput.readLine();
 			System.out.println(line);
@@ -22,5 +22,6 @@ public class GameController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	*/
 	}
 }

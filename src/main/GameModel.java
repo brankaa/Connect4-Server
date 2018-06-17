@@ -3,6 +3,7 @@ package main;
 
 public class GameModel {
 	private PlayerEnum table[][] = new PlayerEnum[Const.dimensionColumns][Const.dimensionRows];
+	
 	public GameModel(){
 		for (int i = 0; i < Const.dimensionColumns; i++) {
 			for (int j = 0; j < Const.dimensionRows; j++) {

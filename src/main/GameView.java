@@ -56,6 +56,7 @@ public class GameView extends JComponent {
 							//System.out.println(gm.getX());
 						}
 						repaint();
+						
 					}
 				}
 			}
